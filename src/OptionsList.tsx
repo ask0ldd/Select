@@ -1,5 +1,5 @@
 import './style/OptionsList.css'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Option from './Option'
 import { SelectContext } from './contexts/SelectContext'
 
@@ -8,7 +8,7 @@ import { SelectContext } from './contexts/SelectContext'
  * @Component
  * @return ( <OptionsList/> )
  */
-function OptionsList(){
+const OptionsList: React.FC<{ siblingRef: React.RefObject<HTMLSpanElement> }> = ({ siblingRef }) => {
 
     const { id, options, listbox, preset } = useContext(SelectContext)
     
@@ -16,7 +16,7 @@ function OptionsList(){
 
     return(
         listbox.isExpanded ? 
-        <ul style={optionsContainerStyle} onClick={(e) => {e.preventDefault();}} tabIndex={-1} id="customListbox" aria-labelledby="customSelectLabel" className="selectOptionsContainer" role="listbox">
+        <ul style={optionsContainerStyle} onClick={(e) => {e.preventDefault();/* siblingRef.current?.focus()*/}} tabIndex={-1} id="customListbox" aria-labelledby="customSelectLabel" className="selectOptionsContainer" role="listbox">
             {options.map((option, index) => <Option key={id+'-option-'+index} index={index} option={option}/>)}
         </ul> 
         : <></>

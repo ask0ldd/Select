@@ -47,7 +47,8 @@ function Option({index, option} : IProps){
         } 
         onMouseEnter={() => setHoverOption(option.value)}
         onMouseOut={() => setHoverOption("0")}
-        onMouseDown={() => {activeOption.set(options[index]); listbox.setAsExpanded(false);}} value={option.value}>{option.label}</li>
+        onMouseDown={(e) => {e.preventDefault(); activeOption.set(options[index]); listbox.setAsExpanded(false);}}
+        value={option.value}>{option.label}</li>
     )
 }
 
