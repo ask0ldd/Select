@@ -1,4 +1,4 @@
-import { RefObject, forwardRef, useContext, useState} from 'react'
+import { useContext, useState} from 'react'
 import './style/ComboBox.css'
 import { SelectContext } from './contexts/SelectContext'
 // import { DatasTableContext } from '../DatasTableContext'
@@ -9,7 +9,7 @@ import { SelectContext } from './contexts/SelectContext'
  * @return ( <SelectComboBox/> )
  */
 // MEMO : forwardRef
-const ComboBox = forwardRef((_, ref : React.Ref<HTMLSpanElement>) => {
+const ComboBox = (() => {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [comboboxFocus, setComboboxFocus] = useState(false) // just to force the refresh of the component when getting in or out focus
@@ -32,8 +32,8 @@ const ComboBox = forwardRef((_, ref : React.Ref<HTMLSpanElement>) => {
     }
 
     return(
-        <span ref={ref as RefObject<HTMLSpanElement>} style={comboboxFocus ? comboboxFocusStyle : comboboxStyle} 
-            onFocus={()=> {setComboboxFocus(true); console.log('focusin')}} onBlur={() => {listbox.setAsExpanded(false); setComboboxFocus(false); console.log('focusout')}} 
+        <span style={comboboxFocus ? comboboxFocusStyle : comboboxStyle} 
+            onFocus={()=> {setComboboxFocus(true);}} onBlur={() => {listbox.setAsExpanded(false); setComboboxFocus(false);}} 
             onMouseDown={() => {listbox.setAsExpanded(!listbox.isExpanded)}} 
             tabIndex={0} aria-controls="customListbox" id={id} role="combobox" 
             aria-haspopup="listbox" aria-activedescendant={activeOption.get().value} aria-labelledby={labelledBy}

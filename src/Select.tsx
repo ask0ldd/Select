@@ -2,7 +2,7 @@
 import './style/Select.css'
 import ComboBox from "./ComboBox"
 import OptionsList from "./OptionsList"
-import {useState, useRef, useEffect, createRef} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import { useKeyboardHandler } from './hooks/useKeyboardHandler'
 import { SelectContext } from './contexts/SelectContext'
 import { ISelectPreset } from './presets/ISelectPreset'
@@ -62,8 +62,6 @@ export function Select({ options, id, labelledBy, defaultOption, onValueChange, 
         setActiveOption, 
         setListboxAsExpanded
     )
-
-    const comboSpanRef = useRef<HTMLSpanElement>(null)
    
     return(
         <div className="selectContainer">
@@ -72,8 +70,8 @@ export function Select({ options, id, labelledBy, defaultOption, onValueChange, 
                 listbox : { isExpanded : isListboxExpanded, setAsExpanded : setListboxAsExpanded},
                 preset : currentPreset
             }}>
-                <ComboBox ref={comboSpanRef}/>
-                <OptionsList siblingRef={comboSpanRef}/>
+                <ComboBox/>
+                <OptionsList/>
             </SelectContext.Provider>
         </div>
     )
